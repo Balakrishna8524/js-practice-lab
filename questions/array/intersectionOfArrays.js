@@ -1,4 +1,5 @@
 
+// usint buit in ==============================================================================================================
 
 function intersection(arr1, arr2){
 	const set2 = new Set(arr2);
@@ -23,9 +24,38 @@ Explanation:
 	The has() method of a Set returns true if the value is present in the set, and false otherwise.
 	Therefore, the filter() method will keep only those items from arr1 for which set2.has(item) returns true (meaning the item is also present in arr2).
 
-	
+
 */
 
 
+// usint loop ==============================================================================================================
+function intersectionWithoutBuiltIns(arr1, arr2) {
+  const result = [];
+  for (let i = 0; i < arr1.length; i++) {
+    const element1 = arr1[i];
+    for (let j = 0; j < arr2.length; j++) {
+      const element2 = arr2[j];
+      if (element1 === element2) {
+        // Check if the element is already in the result to avoid duplicates
+        let alreadyInResult = false;
+        for (let k = 0; k < result.length; k++) {
+          if (result[k] === element1) {
+            alreadyInResult = true;
+            break;
+          }
+        }
+        if (!alreadyInResult) {
+          result.push(element1);
+        }
+        // Once a match is found for the current element in arr1,
+        // we can break the inner loop to avoid redundant checks for the same element.
+        break;
+      }
+    }
+  }
+  return result;
+}
+
+
 // Example
-console.log(intersection([1, 2, 3], [2, 3, 4]));
+console.log(intersectionWithoutBuiltIns([1, 2, 3], [2, 3, 4]));
